@@ -48,5 +48,6 @@ def initialize():
     environment = Environment()
     environment.setup()
 
+
 if __name__ == "__main__":
     initialize()

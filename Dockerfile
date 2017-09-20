@@ -6,8 +6,8 @@ RUN useradd --system -U -u 500 plone \
  && chown -R plone:plone /plone /data
 
 ENV PLONE_MAJOR=5.0
-ENV PLONE_VERSION=5.0.5
-ENV PLONE_MD5=4072f0dda7ecd31d4d19827fd2f06d67
+ENV PLONE_VERSION=5.0.8
+ENV PLONE_MD5=246788240851f48bc2f84289a3dc6480
 
 RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev libmysqlclient-dev" \
  && runDeps="libmysqlclient-dev libxml2 libxslt1.1 libjpeg62 rsync" \
@@ -27,7 +27,7 @@ RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev
       none \
  && cd /plone/instance \
  && sed -i 's/eggs =/eggs =\n    RelStorage\n    MySQL-python\n    plone.restapi/g' buildout.cfg \
- && sed -i 's/http-address = 8080/http-address = 8080\nrel-storage =\n    keep-history false\n    blob-dir \/tmp\/blobcache\n    shared-blob-dir false\n    type mysql\n    compress true\n    host HOST\n    db DBNAME\n    user USER\n    passwd PASS/g' buildout.cfg \
+ && sed -i 's/http-address = 8080/http-address = 8080\nrel-storage =\n    keep-history false\n    blob-dir \/tmp\/blobcache\n    shared-blob-dir false\n    type mysql\n    compress true\n    host HOST\n    db DBNAME\n    user USER\n    passwd PASS\n[versions]\nRelStorage=1.6.3\n/g' buildout.cfg \
  && sudo -u plone bin/buildout \
  && chown -R plone:plone /plone \
  && rm -rf /Plone* \
